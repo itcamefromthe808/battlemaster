@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import BattleControls from './BattleControls';
+// import BattleOptions from './BattleOptions';
 // import Entity from './Entity';
 
 // in order to support separate DM and player views,
@@ -58,8 +58,10 @@ class Battle extends Component {
   render() {
     return (
       <div className="battle-container">
-        <BattleAdmin />
-        <EntityList />
+        <header className="header">
+          <BattleAdmin />
+        </header>
+        <aside className="sidebar"></aside>
       </div>
     );
   }

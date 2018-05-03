@@ -3,9 +3,7 @@ import './App.css';
 
 // import base from "../base";
 
-import BattlePicker from './lobby/BattlePicker';
-import SheetPicker from './lobby/SheetPicker';
-import Login from './lobby/Login';
+import Login from './Login';
 
 class App extends Component {
   state = {

@@ -8,7 +8,7 @@ This is a tool to aid both Players and DMs when managing a 4th Edition Dungeons 
 Some of the features are detailed below
 
 ## Battle Master
-This mode allows a DM to manage a combat encounter. It will manage initiative, hit points, statuses, and all combat stats. By using a database, the state of combat can be saved so combat can be "paused" and resumed later.
+This mode allows a DM to manage a combat encounter. It will manage initiative, hit points, statuses, and all combat stats. By using a database store, the state of combat can be saved so combat can be "paused" and resumed later.
 
 ## Tools
 ### Monster Sheet
@@ -22,21 +22,15 @@ Dice rollers, firebase integration, etc.
 
 ## Hierarchal Component chart
 ```
-App (Lobby / Entry Point)
-  SheetPicker
-  BattlePicker
-Battle (Entry Point)
-  Entity(s)
-  BattleOptions (act like inventory)
-    Login
-    BattleAdmin
-      Monster
-      SheetPicker
-    Entity (expanded state? separate component? will contain link to sheet)
-Player (Entry Point)
-  Login
-Monster (Entry Point)
-  Login
+App (Lobby)
+Login (used by several components)
+Battle
+  BattleAdmin (handles initiative)
+  EntityManager
+  EntityList
+    Entity
+Player
+Monster
 ```
 If you understand this, you are amazing.
 
