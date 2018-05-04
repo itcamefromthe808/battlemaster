@@ -12,14 +12,25 @@ describe('BattleAdmin general controls', () => {
    );
   });
 
-  it('renders without crashing');
+  it('renders without crashing', () => {
+    expect(wrapper.is(".battle-controls")).toBe(true);
+  });
+
+  it("requires a login");
 
   // requires firebase integration
   it('can save battle state');
 
   it('can load an entity from a sheet');
 
-  it('can create an entity');
+  it('can create an entity', () => {
+    // confirm button existance
+    expect(wrapper.find(".create-entity")).toHaveLength(1);
+    // simulate click
+    wrapper.find(".create-entity").simulate("click");
+    // check result
+    expect(wrapper.instance().state.entities.length).toBe(1);
+  });
 
   it('can remove an entity', () => {
     // make sure button exists for simulate

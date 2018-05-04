@@ -4,27 +4,27 @@ import Adapter from 'enzyme-adapter-react-16';
 import EntityManager from './EntityManager';
 
 describe('Entity management functionality', () => {
-  let wrapper = null;
+  let wrapper = null, instance = null;
 
   beforeEach(() => {
-   //  wrapper = shallow(
-   //   <BattleAdmin entities={[{
-   //     "position":"first",
-   //     "initiative":10
-   //   },{
-   //     "position":"second",
-   //     "initiative":5
-   //   }]} />
-   // );
+    wrapper = shallow(
+     <EntityManager />
+   );
+   instance = wrapper.instance();
   });
 
-  it('renders without crashing');
+  it('renders without crashing', () => {
+    expect(wrapper.is(".entity-manager")).toBe(true);
+  });
+
+  // gonna start writing these after teh Entity is complete
+  it("requires a login");
 
   it("can load details from an entity in the store");
 
-  it('routes to the corresponding entity sheet');
+  it("routes to the corresponding entity sheet");
 
-  it('can set required information into an entity');
+  it("can set required information into an entity");
 
   it('can give an entity damage');
 
