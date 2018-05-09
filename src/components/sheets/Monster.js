@@ -1,1 +1,7 @@
-// rember this is a template so we create once and reuse
+import React, { Component } from 'react';
+
+class Monster extends Component {
+
+}
+
+export default Monster;

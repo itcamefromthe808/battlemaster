@@ -1,46 +1,63 @@
 import React, { Component } from 'react';
-import './App.css';
+import styled from 'styled-components';
 
 // import base from "../base";
-
+// import helpers from "../helpers";
 import Login from './Login';
+import BattleList from './BattleList';
+import SheetList from './SheetList';
 
 class App extends Component {
+  // basically, user data
   state = {
-    uid: true
+    uid: true,
+    editor: true,
+    battles: [],
+    sheets: []
   };
 
-  componentDidMount() {
-    // this.ref = base.syncState(`${params.lobbyId}`, {context: this, state: 'battles'});
-  }
+  battleRouter = e => this.props.history.push(`/battles/${e.currentTarget.value || ''}`);
 
-  componentWillUnmount() {
-    // base.removeBinding(this.ref);
-  }
+  playerRouter = e => this.props.history.push(`/players/${e.currentTarget.value || ''}`);
 
-  authHandler = () => {
-
-  }
-
-  authenticate = provider => {
-
-  }
+  monsterRouter = e => this.props.history.push(`/monsters/${e.currentTarget.value || ''}`);
 
   render() {
-    // Check if user is logged in
-    if (this.state.uid) {
+    const Picker = ({ className, children }) => (
+      <section className={className}>
+        {children}
+      </section>
+    );
+
+    const StyledPicker = styled(Picker)`
+      padding:2em;
+      color:darkblue;
+    `;
+
+    if (!this.state.uid) {
       return (
         <div className="lobby">
-          <BattlePicker />
-          <SheetPicker />
+          <Login />
         </div>
       );
     }
 
     return (
-      <div className="lobby">
-        <Login authenticate={this.authenticate} />
-      </div>
+      <main className="lobby">
+        <StyledPicker className={"battle-picker"}>
+          <BattleList uid={this.state.uid} battles={this.state.battles} battleRouter={this.battleRouter} />
+          {this.state.editor ? (
+            <button className="create-battle" onClick={this.battleRouter}>Create a battle</button>
+          ) : ''}
+        </StyledPicker>
+        <StyledPicker className={"sheet-picker"}>
+          <SheetList sheets={this.state.sheets} monsterRouter={this.monsterRouter} playerRouter={this.playerRouter} />
+          <button className="create-sheet" onClick={this.playerRouter}>Create a player sheet</button>
+          {this.state.editor ? (
+            <button className="create-sheet" onClick={this.monsterRouter}>Create a monster sheet</button>
+          ) : ''}
+        </StyledPicker>
+      </main>
     );
   }
 }

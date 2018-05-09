@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 
 class Battle extends Component {
   state = {
-    uid: null,
+    owner: null,
     entities: [],
     initiative: 0,
     round: 0,
@@ -16,11 +16,32 @@ class Battle extends Component {
   };
 
   componentDidMount() {
+    const { params } = this.props.match;
 
+    this.setState({ battleId: params.battleId });
+
+
+    // this.ref = base.syncState(`${params.lobbyId}`, {context: this, state: 'battles'});
   }
 
   componentWillUnmount() {
+    // base.removeBinding(this.ref);
+  }
 
+  authHandler = () => {
+    // look up the user in the store
+    // fetch a list of battles associated with that user
+    // set it on the store
+    // const store = await base.fetch(this.props.storeId, { context: this });
+    // console.log(store);
+
+    // this.setState({
+    //   uid: authData.user.uid
+    // });
+  }
+
+  authenticate = provider => {
+    console.log(`logging in with ${provider}`);
   }
 
   addEntity = entity => {
@@ -59,7 +80,7 @@ class Battle extends Component {
     return (
       <div className="battle-container">
         <header className="header">
-          <BattleAdmin />
+          Battle Header {this.state.battleId ? `for ${this.state.battleId}` : 'creation'}
         </header>
         <aside className="sidebar"></aside>
       </div>
