@@ -17,22 +17,26 @@ Allows templating of monster types for easy reuse.
 ### Player Sheet
 This is going to be a digital character sheet for 4th Edition. It will handle all aspects of maintaining a character and allow a DM to import players into new or existing battles and have all the relevant combat stats brought in.
 
-## Helpers
+## Utilities
 Dice rollers, firebase integration, etc.
 
 ## Hierarchal Component chart
 ```
 App (Lobby)
-Login (used by several components)
-Battle
+  Login
+  BattleList
+  SheetPicker
+  CurrentUser
+Battle (requires login)
+  CurrentUser
   BattleAdmin (handles initiative)
   EntityManager
   EntityList
     Entity
-Player
-Monster
+Player (requires login)
+Monster (requires login)
 ```
 If you understand this, you are amazing.
 
 ### To Do
-Fix my damn grammar.
+Set up access rules in firebase

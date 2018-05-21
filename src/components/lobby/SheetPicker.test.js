@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import SheetList from './SheetList';
+import SheetPicker from './SheetPicker';
 import Player from './sheets/Player';
 import Monster from './sheets/Monster';
 
@@ -8,12 +8,12 @@ import { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 
-describe("Sheet Listing functionality", () => {
+describe("SheetPicker functionality", () => {
   let wrapper;
 
   beforeEach(() => {
     wrapper = shallow(
-      <SheetList />
+      <SheetPicker />
     );
   });
 

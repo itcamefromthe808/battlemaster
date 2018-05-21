@@ -28,22 +28,6 @@ class Battle extends Component {
     // base.removeBinding(this.ref);
   }
 
-  authHandler = () => {
-    // look up the user in the store
-    // fetch a list of battles associated with that user
-    // set it on the store
-    // const store = await base.fetch(this.props.storeId, { context: this });
-    // console.log(store);
-
-    // this.setState({
-    //   uid: authData.user.uid
-    // });
-  }
-
-  authenticate = provider => {
-    console.log(`logging in with ${provider}`);
-  }
-
   addEntity = entity => {
     console.log('adding entity');
   }

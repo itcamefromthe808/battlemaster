@@ -1,26 +1,45 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
-
-// import base from "../base";
-// import helpers from "../helpers";
-import Login from './Login';
-import BattleList from './BattleList';
-import SheetList from './SheetList';
+import BattleList from './lobby/BattleList';
+import CurrentUser from './lobby/CurrentUser';
+import firebase from "firebase";
+import base from "../base";
 
 class App extends Component {
-  // basically, user data
   state = {
-    uid: true,
-    editor: true,
+    uid: null,
     battles: [],
     sheets: []
   };
 
-  battleRouter = e => this.props.history.push(`/battles/${e.currentTarget.value || ''}`);
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.authHandler({ user });
+      }
+    });
 
-  playerRouter = e => this.props.history.push(`/players/${e.currentTarget.value || ''}`);
+    this.ref = base.syncState("battles", {
+      context: this,
+      state: "battles"
+    });
+  }
 
-  monsterRouter = e => this.props.history.push(`/monsters/${e.currentTarget.value || ''}`);
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+
+  authHandler() {
+    const authUser = firebase.auth().currentUser;
+
+    // set user into state
+    if (authUser) {
+      this.setState({
+        uid: authUser.uid
+      });
+    }
+  }
 
   render() {
     const Picker = ({ className, children }) => (
@@ -34,29 +53,15 @@ class App extends Component {
       color:darkblue;
     `;
 
-    if (!this.state.uid) {
-      return (
-        <div className="lobby">
-          <Login />
-        </div>
-      );
-    }
-
+    // can potentially host other tools
     return (
       <main className="lobby">
-        <StyledPicker className={"battle-picker"}>
-          <BattleList uid={this.state.uid} battles={this.state.battles} battleRouter={this.battleRouter} />
-          {this.state.editor ? (
-            <button className="create-battle" onClick={this.battleRouter}>Create a battle</button>
-          ) : ''}
-        </StyledPicker>
+        <BattleList battles={this.state.battles} />
         <StyledPicker className={"sheet-picker"}>
-          <SheetList sheets={this.state.sheets} monsterRouter={this.monsterRouter} playerRouter={this.playerRouter} />
-          <button className="create-sheet" onClick={this.playerRouter}>Create a player sheet</button>
-          {this.state.editor ? (
-            <button className="create-sheet" onClick={this.monsterRouter}>Create a monster sheet</button>
-          ) : ''}
+          <Link to="/players/">Create a player sheet </Link>
+          <Link to="/monsters/">Create a monster sheet</Link>
         </StyledPicker>
+        <CurrentUser uid={this.state.uid} />
       </main>
     );
   }

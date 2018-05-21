@@ -6,18 +6,19 @@ import { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 
-// login tests will be built later
+// need some mocking thing
 
 describe('Login functionality', () => {
   it('renders without crashing', () => {
     expect(shallow(<Login />).is(".login")).toBe(true);
   });
-  
-  it('handles login through github', () => {
 
-  });
+  it('allows login through github');
 
-  it('displays an error message on failed login', () => {
+  it('allows login through facebook');
 
-  });
+  it('allows for a redirect location in the props'); // yeah needs a rewrite
+
+  it('displays an error message on failed login');
+
 });

@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import Router from 'react-router';
 
-class SheetList extends Component {
-  createSheet() {
-    console.log('yup');
-  }
+class SheetPicker extends Component {
 
   render() {
     return (
@@ -17,4 +14,4 @@ class SheetList extends Component {
   }
 };
 
-export default SheetList;
+export default SheetPicker;
